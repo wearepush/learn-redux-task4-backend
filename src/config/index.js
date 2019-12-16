@@ -18,7 +18,7 @@ if (envError) {
 const envFilePath = path.resolve(__dirname, '..', '..', `.env.${value.NODE_ENV}`);
 const envConfig = dotenv.config({ path: envFilePath });
 if (envConfig.error) {
-  throw new Error(`Environment file config error: ${envConfig.error}`);
+  console.log(`Environment file config error: ${envConfig.error}`);
 }
 
 // define validation for all the env vars

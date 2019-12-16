@@ -8,6 +8,7 @@ const cors = require('cors');
 const httpStatus = require('http-status');
 const expressValidation = require('express-validation');
 const helmet = require('helmet');
+const mongoose = require('mongoose');
 const routes = require('./routes');
 const config = require('./config');
 const APIError = require('./helpers/APIError');
@@ -17,6 +18,8 @@ const app = express();
 if (config.env === 'development') {
   app.use(logger('dev'));
 }
+
+app.db = mongoose.connect(process.env.MONGODB_URI);
 
 // parse body params and attache them to req.body
 app.use(bodyParser.json());
