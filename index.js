@@ -14,12 +14,14 @@ mongoose.Promise = Promise;
 
 // connect to mongo db
 const mongoUri = config.mongo.host;
+console.log('mongoUri', mongoUri);
 mongoose.connect(mongoUri, {
   useCreateIndex: true,
   useNewUrlParser: true,
   promiseLibrary: Promise,
 });
-mongoose.connection.on('error', () => {
+mongoose.connection.on('error', (error) => {
+  console.log('error', error);
   throw new Error(`unable to connect to database: ${mongoUri}`);
 });
 

@@ -45,7 +45,7 @@ const envVarsSchema = Joi.object({
 
 const { error, value: envVars } = Joi.validate(process.env, envVarsSchema);
 if (error) {
-  throw new Error(`Config validation error: ${error.message}`);
+  console.log(`Config validation error: ${error.message}`);
 }
 
 const config = {
@@ -55,8 +55,11 @@ const config = {
   jwtSecret: envVars.JWT_SECRET,
   jwtExpiresIn: envVars.JWT_EXPIRES_IN,
   mongo: {
-    host: envVars.MONGO_HOST,
-    port: envVars.MONGO_PORT,
+    host: envVars.MONGO_HOST || envVars.MONGODB_URI,
+    // port: envVars.MONGO_PORT,
+    // db: envVars.MONGO_DB,
+    // user: envVars.MONGO_USER,
+    // pass: envVars.MONGO_PASS,
   },
 };
 
