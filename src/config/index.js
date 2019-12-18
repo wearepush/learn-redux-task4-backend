@@ -36,7 +36,7 @@ const envVarsSchema = Joi.object({
     .description('JWT Secret required to sign'),
   JWT_EXPIRES_IN: Joi.number().default(1440)
     .description('JWT expiration time in seconds'),
-  // MONGO_HOST: Joi.string().required()
+  // MONGO_HOST: Joi.string()
   //   .description('Mongo DB host url'),
   // MONGO_PORT: Joi.number()
   //   .default(27017),
@@ -56,10 +56,7 @@ const config = {
   jwtExpiresIn: envVars.JWT_EXPIRES_IN,
   mongo: {
     host: envVars.MONGO_HOST || envVars.MONGODB_URI,
-    // port: envVars.MONGO_PORT,
-    // db: envVars.MONGO_DB,
-    // user: envVars.MONGO_USER,
-    // pass: envVars.MONGO_PASS,
+    port: envVars.NODE_ENV === 'development' ? envVars.MONGO_PORT : undefined,
   },
 };
 
